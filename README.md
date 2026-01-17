@@ -1,10 +1,12 @@
 # Fraud Detection Prediction App
 
+
 ## Problem Statement
 
-Financial institutions lose billions annually to fraudulent credit transactions. The challenge lies in the class imbalance of transaction data—where legitimate transactions vastly outnumber fraudulent ones—and the need for interpretable models that allow risk officers to understand why a transaction was flagged.
+Financial institutions lose billions annually to fraudulent credit transactions. The challenge lies in the class imbalance of transaction data — where legitimate transactions vastly outnumber fraudulent ones — and the need for interpretable models that allow risk officers to understand why a transaction was flagged.
 
 This project develops an end-to-end pipeline to identify high-risk behavioral patterns and deploy a real-time prediction interface for fraud risk assessment.
+
 
 ## Methodology & Technical Stack
 
@@ -20,13 +22,24 @@ The project follows a rigorous data science lifecycle, emphasizing statistical v
 
 (5) Validation: Applied K-Fold Cross-Validation to ensure model reliability across different data segments.
 
+
 ## Results & Key Findings
 
-(1) Accuracy: Achieved a 90% classification accuracy on the test set.
+(1) **Transaction Type Vulnerability**
+Fraud is not uniformly distributed across all transaction categories. Analysis shows that TRANSFER and CASH_OUT types are the primary vehicles for fraudulent activity.
 
-(2) Interpretability: Identified that transaction frequency and specific merchant categories were the strongest predictors of fraud risk.
+Insight: While other transaction types (like PAYMENT or CASH_IN) show near-zero fraud rates, nearly all fraudulent flags in this dataset are concentrated in these two specific high-velocity categories.
 
-(3) Deployment: Developed a responsive Streamlit dashboard that allows users to input transaction parameters and receive an instant risk score. To access the interactive app, please click the link here: https://frauddetectionapp-8uf2buj4bjwybctwj6nnlg.streamlit.app/
+(2) **Balance Discrepancies & "Emptying" Behavior**
+A significant indicator of fraud was the relationship between the origin account's initial balance (oldbalanceOrg) and the destination account's change in balance.
+
+Insight: Many fraudulent transactions involve a total depletion of the origin account, where the newbalanceOrig drops to zero regardless of the transaction amount, a classic sign of unauthorized account takeover.
+
+(3) **Feature Correlations**
+The correlation matrix identified strong linear relationships between certain variables that were later utilized for feature engineering:
+- High Multicollinearity: A near-perfect correlation (0.98–1.0) exists between oldbalanceDest and newbalanceDest, which necessitated careful feature selection to prevent model overfitting.
+- Fraud Predictors: The amount of the transaction showed the strongest positive correlation with the isFraud label compared to other raw variables.
+
 
 ## Discussion
 
@@ -37,16 +50,6 @@ While the Logistic Regression model provides a strong baseline with high interpr
 (2) Ensemble Methods: Testing Random Forests or XGBoost to capture non-linear relationships, while using SHAP values to maintain transparency.
 
 (3) Real-time Latency: Optimizing the pipeline for sub-second inference in a production environment.
-
-## How to Use
-
-(1) Interactive App: Access the live dashboard here: https://frauddetectionapp-8uf2buj4bjwybctwj6nnlg.streamlit.app/
-
-(2) Local Setup:
-
-git clone https://github.com/henrytan1117/fraud-detection-project.git
-pip install -r requirements.txt
-streamlit run app.py
 
 
 ## Resources and Appendix
