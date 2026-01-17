@@ -42,6 +42,10 @@ The correlation matrix identified strong linear relationships between certain va
 
 ![The Correlation matrix between different features in dataset](correlation.jpeg)
 
+This is the User Interface of the Fraud Detection App.
+
+![User Interface](ui.jpg)
+
 ## Discussion
 
 While the Logistic Regression model provides a strong baseline with high interpretability, future iterations could explore:
