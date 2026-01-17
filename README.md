@@ -40,6 +40,7 @@ The correlation matrix identified strong linear relationships between certain va
 - High Multicollinearity: A near-perfect correlation (0.98–1.0) exists between oldbalanceDest and newbalanceDest, which necessitated careful feature selection to prevent model overfitting.
 - Fraud Predictors: The amount of the transaction showed the strongest positive correlation with the isFraud label compared to other raw variables.
 
+![The Correlation matrix between different features in dataset](correlation.jpeg)
 
 ## Discussion
 
